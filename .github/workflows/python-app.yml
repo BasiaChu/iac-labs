@@ -14,8 +14,10 @@ permissions:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['win','ubuntu']
+    runs-on: ${{matrix.os}}
     defaults:
       run:
         working-directory: ./example-app
@@ -39,7 +41,10 @@ jobs:
         key: ${{ runner.os }}-venv
 
   lint:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['windows','ubuntu']
+    runs-on: ${{matrix.os}}
     needs: build
     defaults:
       run:
@@ -62,8 +67,12 @@ jobs:
     - name: Lint
       run: |
         poetry run task lint
+        
   formatter:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['windows','ubuntu']
+    runs-on: ${{matrix.os}}
     needs: build
     defaults:
       run:
@@ -86,9 +95,12 @@ jobs:
     - name: Lint
       run: |
         poetry run task formatter
+        
   security:
-    runs-on: ubuntu-latest
-    
+    strategy:
+      matrix:
+        os: ['windows','ubuntu']
+    runs-on: ${{matrix.os}}
     needs: build
     defaults:
       run:
@@ -111,8 +123,12 @@ jobs:
     - name: Lint
       run: |
         poetry run task security
+        
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['windows','ubuntu']
+    runs-on: ${{matrix.os}}
     needs: ['lint','formatter','security']
     defaults:
       run:
