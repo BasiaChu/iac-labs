@@ -43,7 +43,7 @@ jobs:
   lint:
     strategy:
       matrix:
-        os: ['windows','ubuntu']
+        os: ['win','ubuntu']
     runs-on: ${{matrix.os}}
     needs: build
     defaults:
@@ -71,7 +71,7 @@ jobs:
   formatter:
     strategy:
       matrix:
-        os: ['windows','ubuntu']
+        os: ['win','ubuntu']
     runs-on: ${{matrix.os}}
     needs: build
     defaults:
@@ -99,7 +99,7 @@ jobs:
   security:
     strategy:
       matrix:
-        os: ['windows','ubuntu']
+        os: ['win','ubuntu']
     runs-on: ${{matrix.os}}
     needs: build
     defaults:
@@ -127,7 +127,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: ['windows','ubuntu']
+        os: ['win','ubuntu']
     runs-on: ${{matrix.os}}
     needs: ['lint','formatter','security']
     defaults:
